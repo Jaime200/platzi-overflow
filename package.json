@@ -4,6 +4,9 @@
   "description": "Un sitio como stackOverFlow",
   "main": "index.js",
   "scripts": {
+    "dev" : "nodemon",
+    "lint" : "standard",
+    "lint-fix": "standard --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jaime Muñoz",
