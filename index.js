@@ -1,5 +1,7 @@
 'use strict'
 const Hapi = require('@hapi/hapi');
+const handlerBars = require('handlebars');
+const vision = require('@hapi/vision');
 const Inert = require('@hapi/inert');
 const path = require('path');
 
@@ -19,12 +21,23 @@ async function init(){
 
     try {
         await server.register(Inert);
-        await server.start();    
+        await server.register(vision);
+
+        server.views({
+            engines: { 
+                hbs: handlerBars },
+            relativeTo: __dirname,
+            path: 'views',
+            layout:true,
+            layoutPath: 'views'
+        });
         server.route({
             method: 'GET',
-            path : '/home',
+            path : '/',
             handler : (req, h)=>{
-                return h.file('index.html')
+                return h.view('index',{
+                    title : 'home'
+                })
             }
         });
     
@@ -38,6 +51,8 @@ async function init(){
                 }
             }
         });
+
+        await server.start();  
     } catch (error) {
         console.log(error);
         process.exit(1);
