@@ -1,0 +1,15 @@
+{
+  "name": "platzi-overflow",
+  "version": "1.0.0",
+  "description": "Un sitio como stackOverFlow",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jaime Muñoz",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "standard": "^14.3.4"
+  }
+}
