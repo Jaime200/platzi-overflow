@@ -12,8 +12,8 @@
   "author": "Jaime Muñoz",
   "license": "MIT",
   "dependencies": {
-    "@hapi/inert": "^6.0.2",
-    "hapi": "^18.1.0"
+    "@hapi/hapi": "^20.0.0",
+    "@hapi/inert": "^6.0.2"
   },
   "devDependencies": {
     "standard": "^14.3.4"
