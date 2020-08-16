@@ -11,10 +11,10 @@ class Users {
     }
 
     async createUser(data){        
-        const dataUser = {
+        let dataUser = {
             ...data
-        }
-        data.password  = await this.constructor.encrypt(dataUser.password)
+        }        
+        dataUser.password  = await this.constructor.encrypt(dataUser.password)
         const newUser = this.collection.push();
         newUser.set(dataUser);
         return newUser.key
@@ -26,7 +26,22 @@ class Users {
         return hashedPassword
     }
 
+    async validateUser(data){
+        const userQuery = await this.collection.orderByChild('email').equalTo(data.email).once('value');
+        const userFound = userQuery.val();
+        if(userFound){
+            
+            console.log(Object.keys(userFound)[0]);
+            const userId = Object.keys(userFound)[0];
+            
+            const passwdRight = await bcrypt.compare(data.password,userFound[userId].password)
+            const result = (passwdRight) ? userFound[userId] : false;
+            return JSON.stringify(result);
+        }
 
+        
+
+    }
 }
 
 module.exports = Users
