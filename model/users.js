@@ -36,7 +36,7 @@ class Users {
             
             const passwdRight = await bcrypt.compare(data.password,userFound[userId].password)
             const result = (passwdRight) ? userFound[userId] : false;
-            return JSON.stringify(result);
+            return result;
         }
 
         
