@@ -28,8 +28,10 @@ module.exports =
             payload:  Joi.object({
                 email:Joi.string().email().required(),
                 password: Joi.string().required().min(6)
-            })
-        }
+            }),
+            failAction: user.failValidation
+        },
+        
     },    
     handler : user.validateUser,
 },
@@ -40,16 +42,18 @@ module.exports =
 },
 {
     method: 'POST',
+    path : '/create-user',
     options :{
         validate :{
             payload:  Joi.object({
                 name:Joi.string().required().min(3),
                 email:Joi.string().email().required(),
                 password: Joi.string().required().min(6)
-            })
-        }
-    },
-    path : '/create-user',
+            }),
+            failAction: user.failValidation
+        },
+        
+    },    
     handler : user.createUser,
 },
 {
