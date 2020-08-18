@@ -36,13 +36,33 @@ function login(req, h){
     })
 }
 
-function notFound(req, h){
-    return h.view('404',{},{ layout:'error-layout'}).code(404)
+async function viewQuestion (req, h) {
+  let data
+  try {
+    data = await questions.getOne(req.params.id)
+    if (!data) {
+      return notFound(req, h)
+    }
+    return h.view('question', {
+        title: 'Detalles de la pregunta',
+        user: req.state.user,
+        question: data,
+        key: req.params.id
+      },{ layout:'layout'})
+  } catch (error) {
+    console.error(error)
+  }
+
+  
+}
+
+function notFound (req, h) {
+  return h.view('404', {}, { layout: 'error-layout' }).code(404)
 }
 
 function fileNotFound(req, h) {
     const response = req.response
-    if(response.isBoom && response.output.statusCode == 404){
+    if(response.isBoom && response.output.statusCode === 404){
         return h.view('404',{},{ layout:'error-layout'}).code(404)
     }
 
@@ -60,6 +80,34 @@ function ask(req, h){
     })
 }
 
+// async function viewQuestion(req, h){
+//     let data;
+//     try {
+//         console.log('enTRO');
+//         data = await questions.getOne(req.params.id);
+//         if(!data){
+//             return notFound(req,h)
+//         }
+//         // return h.view('question',{
+//         //     title:'Detalles de la pregunta',
+//         //     user : req.state.user,
+//         //     question : data,
+//         //     key: req.params.id
+//         // })
+
+
+//         return h.view('ask',{
+//             title:'Detalles de la pregunta',
+//             user: req.state.user
+    
+//         })
+
+//     } catch (error) {
+//         console.log('ERROR====================================');
+//         console.log(error);
+        
+//     }
+// }
 
 module.exports = {
     home,
@@ -67,6 +115,7 @@ module.exports = {
     login,
     notFound,
     fileNotFound,
-    ask
+    ask,
+    viewQuestion
 
 }

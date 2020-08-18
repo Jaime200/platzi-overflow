@@ -25,7 +25,7 @@ async function init(){
             ttl: (1000 * 60 * 60 * 24 * 7),
             isSecure: process.env.NODE_ENV === 'prod',
             encoding: 'base64json',
-            path: '/'
+            // path: '/'
             })
         server.views({
             engines: { 

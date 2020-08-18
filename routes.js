@@ -12,6 +12,12 @@ module.exports =
 },
 {
     method: 'GET',
+    path : '/question/{id}',
+    handler : site.viewQuestion    
+    
+},
+{
+    method: 'GET',
     path : '/login',
     handler : site.login
 },
@@ -25,6 +31,7 @@ module.exports =
     path : '/logout',
     handler : user.logout
 },
+
 {
     method: 'POST',
     path : '/validate-user',
@@ -81,7 +88,7 @@ module.exports =
     path : '/assets/{param*}',
     handler : {
         directory : {
-            path : './SITIO_1',
+            path :  './SITIO_1',
             index : ['index.html']
         }
     }
