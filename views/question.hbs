@@ -15,7 +15,12 @@
               Creada por <strong>{{answer.user.name}}</strong>
             </div>
             <div class="col-sm text-right">
-
+              {{#with user}}
+                {{#ifEquals ../../question.owner.email ../../user.email}}
+                {{!-- <h3><span class="badge badge-success">Respuesta correcta</span></h3> --}}
+                <a href="#" class="btn btn-primary" role="button"> Elegir respuesta correcta</a>
+                {{/ifEquals}}
+              {{/with}}
             </div>
           </div>
         </div>
