@@ -62,7 +62,11 @@ module.exports =
     },    
     handler : question.answerQuestion,
 },
-
+{
+    method: 'GET',
+    path : '/answer/{questionId}/{answerId}',
+    handler : question.setAnswerRight
+},
 {
     method: 'POST',
     path : '/create-question',
