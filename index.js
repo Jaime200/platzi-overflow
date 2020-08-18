@@ -6,6 +6,10 @@ const Inert = require('@hapi/inert');
 const path = require('path');
 const routes = require('./routes')
 const site = require('./controllers/site')
+handlerBars.registerHelper('answerNumber',(answers)=>{
+    const keys = Object.keys(answers).length;
+    return keys
+})
 const server = Hapi.server({
     port: process.env.PORT || 3000,
     host: 'localhost',

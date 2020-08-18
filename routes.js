@@ -49,6 +49,22 @@ module.exports =
 },
 {
     method: 'POST',
+    path : '/answer-question',
+    options :{
+        validate :{
+            payload:  Joi.object({
+                answer:Joi.string().required(),
+                id: Joi.string().required()
+            }),
+            failAction: user.failValidation
+        },
+        
+    },    
+    handler : question.answerQuestion,
+},
+
+{
+    method: 'POST',
     path : '/create-question',
     options :{
         validate :{
@@ -62,6 +78,7 @@ module.exports =
     },    
     handler : question.createQuestion,
 },
+
 {
     method: 'GET',
     path : '/register',
@@ -93,6 +110,7 @@ module.exports =
         }
     }
 },
+
 {
     method: ['GET','POST'],
     path : '/{any*}',
