@@ -8,6 +8,9 @@ const methods = require('./lib/methods');
 const path = require('path');
 const routes = require('./routes');
 const site = require('./controllers/site');
+
+const Crumb = require('@hapi/crumb');
+
 //  const handlerBars = require('handlebars')
 const server = Hapi.server({
     port: process.env.PORT || 3000,
@@ -36,6 +39,15 @@ async function init(){
                } 
             }
         })
+
+        await server.register({
+            plugin: Crumb,
+            options: {
+                cookieOptions:{
+                    isSecure: process.env.NODE_ENV ==='prod'
+                }
+            }
+          });
 
         await server.register({
             plugin : require('./lib/api'),
