@@ -9,6 +9,8 @@ const path = require('path');
 const routes = require('./routes');
 const site = require('./controllers/site');
 
+const Blankie = require('blankie');
+const Scooter = require('@hapi/scooter');
 const Crumb = require('@hapi/crumb');
 
 //  const handlerBars = require('handlebars')
@@ -55,6 +57,17 @@ async function init(){
                 prefix: 'api'
             }
         })
+
+        await server.register([Scooter, {
+            plugin: Blankie,
+            options: {
+                defaultSrc: `'self' 'unsafe-inline'`,
+                styleSrc: `'self' 'unsafe-inline' https://maxcdn.bootstrapcdn.com`,
+                fontSrc: `'self' 'unsafe-inline' data:`,
+                scriptSrc: `'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://maxcdn.bootstrapcdn.com/ https://code.jquery.com/`,
+                generateNonces: false
+            } 
+        }]);
 
         server.method('setAnswerRight',methods.setAnswerRight)
         server.method('getLast',methods.getLast,{
