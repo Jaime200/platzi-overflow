@@ -16,7 +16,7 @@ async function createQuestion(req, h){
 
     if(Buffer.isBuffer(bufferImg)){
         filename = `${uuidv1()}.png`;          
-        await write(join(__dirname,'..','public','uploads',filename), req.payload.image);
+        await write(join(__dirname,'..','public','SITIO_1','uploads',filename), req.payload.image);
     }
 
     try {
