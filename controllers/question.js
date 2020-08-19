@@ -3,6 +3,7 @@ const { writeFile }  = require('fs');
 const { promisify } = require('util');
 const { join } = require('path');
 const { v1: uuidv1 } = require('uuid');
+const { server } = require('@hapi/hapi');
 
 const write = promisify(writeFile);
 
@@ -39,9 +40,11 @@ async function answerQuestion (req, h){
     let result
     try {
         result = await questions.answer(req.payload, req.state.user)
-        console.log(`Respuesta creada: ${result}`);
+        //console.log(`Respuesta creada: ${result}`);
+        req.log('info',`Respuesta creada: ${result}`)
     } catch (error) {
         console.error(error);
+        req.log('error',`Ocurro un error ${error}`)
         
     }
     return h.redirect(`/question/${req.payload.id}`)
